@@ -181,11 +181,10 @@ class LastModifiedTimestamp {
 	 	return $columns;
 	}
 
-	// Output CSS for width of new column 
-	function print_admin_css() {
-
-		echo '<style type="text/css">#last-modified{width:120px;}#message .last-modified-timestamp{font-weight:bold;}</style>'."\n";
-
+	// Output CSS for width of new column
+	function print_admin_css()
+	{
+		echo '<style type="text/css">.fixed .column-last-modified{width:10%;}#message .last-modified-timestamp{font-weight:bold;}</style>'."\n";
 	}
 }
 
