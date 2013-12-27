@@ -93,6 +93,10 @@ Email any questions to `evanmattson` *at* `gmail` *dot* `com`
 
 == Changelog ==
 
+= 1.0.1 =
+* General housekeeping & maintanence
+* Tested against 3.8
+
 = 1.0 =
 **Major Update**
 
