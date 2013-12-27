@@ -29,10 +29,6 @@ class LastModifiedTimestamp
 
 	public static $defaults;
 
-	// PHP 4 Constructor
-	function LastModifiedTimestamp() {
-		$this->__construct();
-	}
 	function __construct()
 	{
 		add_action( 'plugins_loaded',	array( &$this, 'setup_defaults' ) );
