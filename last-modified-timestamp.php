@@ -24,64 +24,77 @@ Author: Evan Mattson
 */
 
 
-class LastModifiedTimestamp {
+class LastModifiedTimestamp
+{
 
-	function __construct() {
+	public static $defaults;
 
-		add_action( 'admin_init', 					array( $this, 'admin_actions' 		), 1 );  // next to date
-		add_action( 'init', 						array( $this, 'front_end_actions'	) );
-
-		add_shortcode('last-modified',				array( $this, 'shortcode_handler' ) );
-
-	}
 	// PHP 4 Constructor
 	function LastModifiedTimestamp() {
 		$this->__construct();
 	}
+	function __construct()
+	{
+		add_action( 'plugins_loaded',	array( &$this, 'setup_defaults' ) );
+		add_action( 'admin_init',		array( &$this, 'admin_actions' ), 1 );
 
-	function admin_actions() {
-
-		add_action( 'admin_print_styles', 			array( $this, 'print_admin_css'		) );
-		add_filter( 'post_updated_messages', 		array( $this, 'modify_messages'		) );
-		add_action( 'post_submitbox_misc_actions', 	array( $this, 'publish_box'			), 1 );  // NEW PRIORITY
-
-		foreach ( get_post_types() as $pt ) {
-
-			add_filter( 'manage_' . $pt . '_posts_columns', 		array( $this, 'column_heading' 	), 10, 1 );
-			add_action( 'manage_' . $pt . '_posts_custom_column', 	array( $this, 'column_content' 	), 10, 2 );
-			add_action( 'manage_edit-' . $pt . '_sortable_columns', array( $this, 'column_sort' 	), 10, 2 );
-
-		}
-
+		add_shortcode( 'last-modified',	array( &$this, 'shortcode_handler' ) );
 	}
 
-	function get_defaults( $context = null ) {
-
+	function setup_defaults()
+	{
 		$d = array();
-		// generic defaults
+		// base defaults
 		$d['base'] = array(
 			'datef'  => 'M j, Y',
 			'timef'  => null,
 			'sep'    => '@',
 			'format' => '%date% %sep% %time%'
 		);
-		// modify defaults on a contextual basis
+		// extended contextual defaults
 		$d['contexts'] = array(
-			'wp-table'    	=> array(
-				'datef' => 'Y/m/d',
-				'sep'   => '<br />'),
 			'messages'    	=> array(),
 			'publish-box' 	=> array(),
-			'shortcode' 	=> array()
+			'shortcode' 	=> array(),
+			'wp-table'    	=> array(
+				'datef' => 'Y/m/d',
+				'sep'   => '<br />'
+			),
 		);
 
-		$defaults = apply_filters( 'last_modified_timestamp_defaults', $d );
+		static::$defaults = $d;
+	}
 
-		if ( $context && array_key_exists($context, $defaults['contexts']) )
-			return wp_parse_args($defaults['contexts'][$context], $defaults['base']);
+	function admin_actions()
+	{
+		add_action( 'admin_print_styles-edit.php',			array( &$this, 'print_admin_css' ) );
+		add_action( 'admin_print_styles-post.php',			array( &$this, 'print_admin_css' ) );
+		add_action( 'admin_print_styles-post-new.php',		array( &$this, 'print_admin_css' ) );
+		add_action( 'post_submitbox_misc_actions',			array( &$this, 'publish_box'	 ), 1 );  // NEW PRIORITY
+
+		add_filter( 'post_updated_messages',				array( &$this, 'modify_messages' ) );
+
+		foreach ( get_post_types() as $pt )
+		{
+			add_filter( "manage_{$pt}_posts_columns",			array( &$this, 'column_heading' ), 10, 1 );
+			add_action( "manage_{$pt}_posts_custom_column",		array( &$this, 'column_content' ), 10, 2 );
+			add_action( "manage_edit-{$pt}_sortable_columns",	array( &$this, 'column_sort' 	), 10, 2 );
+		}
+	}
+
+	function get_defaults( $context = null )
+	{
+		/**
+		 * filter 'last_modified_timestamp_defaults'
+		 *
+		 * @param mixed (null|string) $context  - the context the timestamp will be used in
+		 */
+		$defaults = apply_filters( 'last_modified_timestamp_defaults', static::$defaults, $context );
+
+		if ( $context && isset( $defaults['contexts'][ $context ] ) )
+			return wp_parse_args( $defaults['contexts'][ $context ], $defaults['base'] );
 		else
 			return $defaults['base'];
-
 	}
 
 	/**
