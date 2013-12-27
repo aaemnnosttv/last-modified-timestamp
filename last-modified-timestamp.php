@@ -123,69 +123,63 @@ class LastModifiedTimestamp
 	 *                       	All attributes are optional. Defaults can also be filtered.
 	 * @return string 			timestamp html
 	 */
-	function shortcode_handler( $atts = array() ) {
-
+	function shortcode_handler( $atts = array() )
+	{
 		$atts = shortcode_atts( $this->get_defaults('shortcode'), $atts );
-
 		return $this->construct_timestamp('shortcode', $atts);
 	}
 
 	/**
 	 * Filters the admin messages at the top of the page on post.php for pages & posts to include the last modified timestamp.
 	 * @param  array 	$messages
-	 * @return array           		
+	 * @return array
 	 */
-	function modify_messages( $messages ) {
-
+	function modify_messages( $messages )
+	{
 		$timestamp = $this->construct_timestamp('messages');
-		
-		// define a pattern to only match appropriate messages
-		$match = array('updated','published','saved','submitted','restored');
-		// internationalize match terms
-		$match = array_map('__', $match);
 
-		$pattern = '/' . implode('|', $match) . '/';
-		
-		foreach ($messages as $key => &$array) {
-			foreach ($array as $inner_key => &$value) {
-
-				if ( ! empty($value) && preg_match($pattern , $value) ) {
-					
-					if ( false !== $entry_point = strpos($value, '.') ) {
-
-						$first_half = substr($value, 0, $entry_point+1 );
-						$second_half = substr($value, strlen($first_half));
-
-						$value = $first_half.' '.$timestamp.'. '.$second_half;
-
-					} else
-						$value = $timestamp.': '.$value;
+		foreach ( $messages as $posttype => &$array )
+		{
+			foreach ( $array as $index => &$msg )
+			{
+				if ( false !== $entry_point = strpos( $msg, '.' ) )
+				{
+					$first_half  = substr( $msg, 0, $entry_point+1 );
+					$second_half = substr( $msg, strlen( $first_half ));
+					$msg       = "$first_half $timestamp. $second_half";
 				}
-
+				else
+					$msg = "$timestamp: $msg";
 			}
 		}
+
 		return $messages;
 	}
 
 	// Add the Last Modified timestamp to the 'Publish' meta box in post.php
-	function publish_box() {
+	function publish_box()
+	{
 		$timestamp = sprintf( __('Last modified on: <strong>%1$s</strong>'), $this->construct_timestamp('publish-box') );
 		echo '<div class="misc-pub-section misc-pub-section-last">' . $timestamp . '</div>';
 	}
 
 	// Append the new column to the columns array
-	function column_heading( $columns ) {
+	function column_heading( $columns )
+	{
 		$columns['last-modified'] = 'Last Modified';
 		return $columns;
 	}
+
 	// Put the last modified date in the content area
-	function column_content( $column_name, $id ) {
+	function column_content( $column_name, $id )
+	{
 		if ( 'last-modified' == $column_name )
 			echo $this->construct_timestamp('wp-table');
 	}
 
 	// Register the column as sortable
-	function column_sort( $columns ) {
+	function column_sort( $columns )
+	{
 		$columns['last-modified'] = 'modified';
 	 	return $columns;
 	}
@@ -195,18 +189,18 @@ class LastModifiedTimestamp
 	{
 		echo '<style type="text/css">.fixed .column-last-modified{width:10%;}#message .last-modified-timestamp{font-weight:bold;}</style>'."\n";
 	}
+
+} // LastModifiedTimestamp
+
+function get_the_last_modified_timestamp( $context = null, $override = null )
+{
+	return LastModifiedTimestamp::construct_timestamp( $context, $override );
 }
 
-function get_the_last_modified_timestamp( $context = null, $override = null ) {
-
-	return LastModifiedTimestamp::construct_timestamp($context,$override);
-
+function the_last_modified_timestamp( $context = null, $override = null )
+{
+	echo get_the_last_modified_timestamp( $context, $override );
 }
-function the_last_modified_timestamp( $context = null, $override = null ) {
-
-	echo get_the_last_modified_timestamp($context, $override);
-}
-
 
 //	MAKE IT SO.
 new LastModifiedTimestamp();
