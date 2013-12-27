@@ -99,21 +99,28 @@ class LastModifiedTimestamp
 	 * @param  array  	$override 		Used by shortcode to pass per-instance values
 	 * @return string 	$timestramp		timestamp html
 	 */
-	function construct_timestamp( $context = null, $override = null ) {
-		
-		if ( $override && is_array($override) )
-			extract( wp_parse_args($override, $this->get_defaults()) );
-		else
-			extract( $this->get_defaults($context) );
+	function construct_timestamp( $context = null, $override = null )
+	{
+		$data = $this->get_defaults( $context );
 
+		if ( $override && is_array( $override ) )
+			$data = wp_parse_args( $override, $data );
+
+		extract( $data );
 
 		$timestamp = str_replace(
-			array( '%date%','%time%','%sep%' ),												// search
-			array( get_the_modified_date($datef), get_the_modified_time($timef), $sep ), 	// replace
-			$format); 																		// subject
+			array( '%date%','%time%','%sep%' ),													// search
+			array( get_the_modified_date( $datef ), get_the_modified_time( $timef ), $sep ),	// replace
+			$format 																			// subject
+		);
 
-		$timestamp = '<span class="last-modified-timestamp">'.$timestamp.'</span>';
+		$timestamp = "<span class='last-modified-timestamp'>$timestamp</span>";
 
+		/**
+		 * filter 'last_modified_timestamp_output'
+		 *
+		 * @param mixed (null|string) $context  - the context the timestamp will be used in
+		 */
 		return apply_filters( 'last_modified_timestamp_output', $timestamp, $context );
 	}
 
