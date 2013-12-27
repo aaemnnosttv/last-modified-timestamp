@@ -17,7 +17,7 @@ Enhanced areas:
 
 1. Page/post admin tables - added `Last Modified` column which is also sortable.
 1. Page/post edit screen (`post.php`) - added `Last modified on: *timestamp*` to `Publish` meta box.
-1. Admin messages after editing a page/post - ie: `Post updated. *timestamp* View Post`, 
+1. Admin messages after editing a page/post - ie: `Post updated. *timestamp* View Post`,
 
 No options currently available, but the output can be fully customized with filters and the shortcode can be easily customized using attributes!
 
@@ -74,16 +74,12 @@ Models the function naming convention used by WordPress for `get_the_content` / 
 * `get_the_last_modified_timestamp()` - returns timestamp.
 * `the_last_modified_timestamp()` - displays/echos the timestamp.
 
-These functions accept 2 arguments, both are optional: 
+These functions accept 2 arguments, both are optional:
 
 * `$context` (string) to output formatted according to a defined context (ie: admin messages, posts table, etc.)
 * `$override` (array) using this will override any defaults that are specified here, but output can still be overriden at final output.
 Example array structure is: `array('datef' => 'M j, Y', 'timef' => 'g:i', 'sep' => '&rarr;', 'format' => '%date% %sep% %time%')`
 
-
-
-
-Email any questions to `evanmattson` *at* `gmail` *dot* `com`
 
 
 == Screenshots ==
