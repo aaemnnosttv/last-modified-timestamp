@@ -1,12 +1,15 @@
 <?php
 /*
-Plugin Name: Last Modified Timestamp
-Description: This plugin adds information to the admin interface about when each post/page was last modified (including custom post types!). Use the [last-modified] shortcode in your content!
-Version: 1.0
-Author: Evan Mattson
+	Plugin Name: Last Modified Timestamp
+	Version: 1.0.1
+	Description: This plugin adds information to the admin interface about when each post/page was last modified (including custom post types!). Use the [last-modified] shortcode in your content!
+	Author: Evan Mattson
+	Author URI: http://wp.aaemnnost.tv/
+	Plugin URI: https://github.com/aaemnnosttv/last-modified-timestamp
 */
 
-/*  Copyright 2011 Evan Mattson (email: evanmattson at gmail.com)
+/*
+	Copyright 2011-2013 Evan Mattson (email: me at aaemnnost dot tv)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
