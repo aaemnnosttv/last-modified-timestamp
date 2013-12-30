@@ -1,9 +1,9 @@
 === Last Modified Timestamp ===
-Stable tag: 1.0.1
+Stable tag: 1.0
 Contributors: aaemnnosttv
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LRA4JZYALHX82
 Tags: page modified, post modified, timestamp, last modified, modified time, custom post type modified
-Requires at least: 3.0.0
+Requires at least: 3.2.0
 Tested up to: 3.8
 License: GPLv2 or later
 
@@ -89,6 +89,10 @@ Example array structure is: `array('datef' => 'M j, Y', 'timef' => 'g:i', 'sep' 
 1. Admin messages after editing a page/post - ie: `Post updated. *timestamp* View Post`
 
 == Changelog ==
+
+= 1.0.2 =
+* Min required WP bump to >= 3.2
+* PHP compatibility fix
 
 = 1.0.1 =
 * General housekeeping & maintanence
