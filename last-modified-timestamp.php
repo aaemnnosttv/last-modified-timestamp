@@ -30,38 +30,34 @@
 class LastModifiedTimestamp
 {
 
-	public static $defaults;
-
 	function __construct()
 	{
-		add_action( 'plugins_loaded',	array( &$this, 'setup_defaults' ) );
+		$this->defaults = array(
+			// base defaults
+			'base' => array(
+				'datef'  => 'M j, Y',
+				'timef'  => null,
+				'sep'    => '@',
+				'format' => '%date% %sep% %time%'
+			),
+			// extended contextual defaults
+			'contexts' => array(
+				'messages'    	=> array(),
+				'publish-box' 	=> array(),
+				'shortcode' 	=> array(),
+				'wp-table'    	=> array(
+					'datef' => 'Y/m/d',
+					'sep'   => '<br />'
+				),
+			)
+		);
+
+		/**
+		 * Init actions
+		 */
 		add_action( 'admin_init',		array( &$this, 'admin_actions' ), 1 );
 
 		add_shortcode( 'last-modified',	array( &$this, 'shortcode_handler' ) );
-	}
-
-	function setup_defaults()
-	{
-		$d = array();
-		// base defaults
-		$d['base'] = array(
-			'datef'  => 'M j, Y',
-			'timef'  => null,
-			'sep'    => '@',
-			'format' => '%date% %sep% %time%'
-		);
-		// extended contextual defaults
-		$d['contexts'] = array(
-			'messages'    	=> array(),
-			'publish-box' 	=> array(),
-			'shortcode' 	=> array(),
-			'wp-table'    	=> array(
-				'datef' => 'Y/m/d',
-				'sep'   => '<br />'
-			),
-		);
-
-		static::$defaults = $d;
 	}
 
 	function admin_actions()
@@ -88,7 +84,7 @@ class LastModifiedTimestamp
 		 *
 		 * @param mixed (null|string) $context  - the context the timestamp will be used in
 		 */
-		$defaults = apply_filters( 'last_modified_timestamp_defaults', static::$defaults, $context );
+		$defaults = apply_filters( 'last_modified_timestamp_defaults', $this->defaults, $context );
 
 		if ( $context && isset( $defaults['contexts'][ $context ] ) )
 			return wp_parse_args( $defaults['contexts'][ $context ], $defaults['base'] );
