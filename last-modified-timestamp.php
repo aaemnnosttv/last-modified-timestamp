@@ -29,8 +29,9 @@
 
 class LastModifiedTimestamp
 {
+	private static $instance;
 
-	function __construct()
+	protected function __construct()
 	{
 		$this->defaults = array(
 			// base defaults
@@ -196,11 +197,19 @@ class LastModifiedTimestamp
 		echo '<style type="text/css">.fixed .column-last-modified{width:10%;}#message .last-modified-timestamp{font-weight:bold;}</style>'."\n";
 	}
 
+	public static function get_instance()
+	{
+		if ( is_null( self::$instance ) )
+			self::$instance = new self();
+
+		return self::$instance;
+	}
+
 } // LastModifiedTimestamp
 
 function get_the_last_modified_timestamp( $context = null, $override = null )
 {
-	return LastModifiedTimestamp::construct_timestamp( $context, $override );
+	return LastModifiedTimestamp::get_instance()->construct_timestamp( $context, $override );
 }
 
 function the_last_modified_timestamp( $context = null, $override = null )
@@ -209,4 +218,4 @@ function the_last_modified_timestamp( $context = null, $override = null )
 }
 
 //	MAKE IT SO.
-new LastModifiedTimestamp();
+LastModifiedTimestamp::get_instance();
