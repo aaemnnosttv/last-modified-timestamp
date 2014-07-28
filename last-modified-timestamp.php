@@ -56,25 +56,25 @@ class LastModifiedTimestamp
 		/**
 		 * Init actions
 		 */
-		add_action( 'admin_init',		array( &$this, 'admin_actions' ), 1 );
+		add_action( 'admin_init',		array( $this, 'admin_actions' ), 1 );
 
-		add_shortcode( 'last-modified',	array( &$this, 'shortcode_handler' ) );
+		add_shortcode( 'last-modified',	array( $this, 'shortcode_handler' ) );
 	}
 
 	function admin_actions()
 	{
-		add_action( 'admin_print_styles-edit.php',			array( &$this, 'print_admin_css' ) );
-		add_action( 'admin_print_styles-post.php',			array( &$this, 'print_admin_css' ) );
-		add_action( 'admin_print_styles-post-new.php',		array( &$this, 'print_admin_css' ) );
-		add_action( 'post_submitbox_misc_actions',			array( &$this, 'publish_box'	 ), 1 );  // NEW PRIORITY
+		add_action( 'admin_print_styles-edit.php',			array( $this, 'print_admin_css' ) );
+		add_action( 'admin_print_styles-post.php',			array( $this, 'print_admin_css' ) );
+		add_action( 'admin_print_styles-post-new.php',		array( $this, 'print_admin_css' ) );
+		add_action( 'post_submitbox_misc_actions',			array( $this, 'publish_box' ), 1 );  // NEW PRIORITY
 
-		add_filter( 'post_updated_messages',				array( &$this, 'modify_messages' ) );
+		add_filter( 'post_updated_messages',				array( $this, 'modify_messages' ) );
 
 		foreach ( get_post_types() as $pt )
 		{
-			add_filter( "manage_{$pt}_posts_columns",			array( &$this, 'column_heading' ), 10, 1 );
-			add_action( "manage_{$pt}_posts_custom_column",		array( &$this, 'column_content' ), 10, 2 );
-			add_action( "manage_edit-{$pt}_sortable_columns",	array( &$this, 'column_sort' 	), 10, 2 );
+			add_filter( "manage_{$pt}_posts_columns",			array( $this, 'column_heading' ), 10, 1 );
+			add_action( "manage_{$pt}_posts_custom_column",		array( $this, 'column_content' ), 10, 2 );
+			add_action( "manage_edit-{$pt}_sortable_columns",	array( $this, 'column_sort'    ), 10, 2 );
 		}
 	}
 
