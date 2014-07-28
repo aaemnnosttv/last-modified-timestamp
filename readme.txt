@@ -4,7 +4,7 @@ Contributors: aaemnnosttv
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LRA4JZYALHX82
 Tags: page modified, post modified, timestamp, last modified, modified time, custom post type modified
 Requires at least: 3.2.0
-Tested up to: 3.9
+Tested up to: 3.9.1
 License: GPLv2 or later
 
 Adds the last modified time to the admin interface as well as a [last-modified] shortcode to use on the front-end. Over-powered.
@@ -59,13 +59,13 @@ To customize the output in an admin context, a filter may be used.
 
 For example, if you wanted to change the time format in the admin messages that appear after a post is modified to a 24hr format with leading zeros, add this to your theme's functions.php:
 
-`add_filter('last_modified_timestamp_defaults','my_lmt_defaults');
-function my_lmt_defaults($d) {
+`function my_lmt_defaults( $d ) {
 
 	$d['contexts']['messages']['timef'] = 'H:i';
 
 	return $d;
-}`
+}
+add_filter('last_modified_timestamp_defaults','my_lmt_defaults');`
 
 **Template Tags**
 
@@ -89,6 +89,9 @@ Example array structure is: `array('datef' => 'M j, Y', 'timef' => 'g:i', 'sep' 
 1. Admin messages after editing a page/post - ie: `Post updated. *timestamp* View Post`
 
 == Changelog ==
+
+= 1.0.3 =
+* Template function bugfix
 
 = 1.0.2 =
 * Min required WP bump to >= 3.2
