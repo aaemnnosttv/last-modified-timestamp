@@ -1,0 +1,80 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Last Modified Timestamp\n"
+"POT-Creation-Date: 2015-09-01 12:33+0100\n"
+"PO-Revision-Date: 2015-09-01 12:39+0100\n"
+"Last-Translator: Florian Edelmann <florian-edelmann@online.de>\n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.5\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: \n"
+
+#: last-modified-timestamp.php:41
+msgctxt "default date format"
+msgid "M j, Y"
+msgstr "j. M Y"
+
+#: last-modified-timestamp.php:43
+msgctxt "default separator"
+msgid "@"
+msgstr "@"
+
+#: last-modified-timestamp.php:44
+msgctxt "default format"
+msgid "%date% %sep% %time%"
+msgstr "%date% %sep% %time%"
+
+#: last-modified-timestamp.php:49
+msgctxt "messages date format"
+msgid "M j, Y"
+msgstr "j. M Y"
+
+#: last-modified-timestamp.php:50
+msgctxt "messages separator"
+msgid "@"
+msgstr "um"
+
+#: last-modified-timestamp.php:53
+msgctxt "publish-box date format"
+msgid "M j, Y"
+msgstr "j. M Y"
+
+#: last-modified-timestamp.php:54
+msgctxt "publish-box separator"
+msgid "@"
+msgstr "@"
+
+#: last-modified-timestamp.php:57
+msgctxt "shortcode date format"
+msgid "M j, Y"
+msgstr "j. M Y"
+
+#: last-modified-timestamp.php:58
+msgctxt "shortcode separator"
+msgid "@"
+msgstr "@"
+
+#: last-modified-timestamp.php:61
+msgctxt "wp-table date format"
+msgid "Y/m/d"
+msgstr "d.m.Y"
+
+#: last-modified-timestamp.php:62
+msgctxt "wp-table separator"
+msgid "<br />"
+msgstr "<br />"
+
+#: last-modified-timestamp.php:180
+#, php-format
+msgid "Last modified on: <strong>%1$s</strong>"
+msgstr "Zuletzt geändert am: <strong>%1$s</strong>"
+
+#: last-modified-timestamp.php:187
+msgctxt "column heading"
+msgid "Last Modified"
+msgstr "Letzte Änderung"
