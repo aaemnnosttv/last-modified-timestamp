@@ -3,6 +3,8 @@
 	Plugin Name: Last Modified Timestamp
 	Version: 1.0.3
 	Description: This plugin adds information to the admin interface about when each post/page was last modified (including custom post types!). Use the [last-modified] shortcode in your content!
+	Text Domain: last-modified-timestamp
+	Domain Path: /languages
 	Author: Evan Mattson
 	Author URI: http://wp.aaemnnost.tv/
 	Plugin URI: https://github.com/aaemnnosttv/last-modified-timestamp
@@ -33,22 +35,33 @@ class LastModifiedTimestamp
 
 	protected function __construct()
 	{
+		load_plugin_textdomain( 'last-modified-timestamp', false, dirname( plugin_basename(__FILE__) ) . '/languages/' );
+
 		$this->defaults = array(
 			// base defaults
 			'base' => array(
-				'datef'  => 'M j, Y',
+				'datef'  => _x('M j, Y', 'default date format', 'last-modified-timestamp'),
 				'timef'  => null,
-				'sep'    => '@',
-				'format' => '%date% %sep% %time%'
+				'sep'    => _x('@', 'default separator', 'last-modified-timestamp'),
+				'format' => _x('%date% %sep% %time%', 'default format', 'last-modified-timestamp')
 			),
 			// extended contextual defaults
 			'contexts' => array(
-				'messages'    	=> array(),
-				'publish-box' 	=> array(),
-				'shortcode' 	=> array(),
+				'messages'    	=> array(
+					'datef' => _x('M j, Y', 'messages date format', 'last-modified-timestamp'),
+					'sep'   => _x('@', 'messages separator', 'last-modified-timestamp')
+				),
+				'publish-box' 	=> array(
+					'datef' => _x('M j, Y', 'publish-box date format', 'last-modified-timestamp'),
+					'sep'   => _x('@', 'publish-box separator', 'last-modified-timestamp')
+				),
+				'shortcode' 	=> array(
+					'datef' => _x('M j, Y', 'shortcode date format', 'last-modified-timestamp'),
+					'sep'   => _x('@', 'shortcode separator', 'last-modified-timestamp')
+				),
 				'wp-table'    	=> array(
-					'datef' => 'Y/m/d',
-					'sep'   => '<br />'
+					'datef' => _x('Y/m/d', 'wp-table date format', 'last-modified-timestamp'),
+					'sep'   => _x('<br />', 'wp-table separator', 'last-modified-timestamp')
 				),
 			)
 		);
@@ -114,7 +127,7 @@ class LastModifiedTimestamp
 			$format 																			// subject
 		);
 
-		$timestamp = "<span class='last-modified-timestamp'>$timestamp</span>";
+		$timestamp = '<span class="last-modified-timestamp">' . $timestamp . '</span>';
 
 		/**
 		 * filter 'last_modified_timestamp_output'
@@ -166,14 +179,14 @@ class LastModifiedTimestamp
 	// Add the Last Modified timestamp to the 'Publish' meta box in post.php
 	function publish_box()
 	{
-		$timestamp = sprintf( __('Last modified on: <strong>%1$s</strong>'), $this->construct_timestamp('publish-box') );
+		$timestamp = sprintf( __('Last modified on: <strong>%1$s</strong>', 'last-modified-timestamp'), $this->construct_timestamp('publish-box') );
 		echo '<div class="misc-pub-section misc-pub-section-last">' . $timestamp . '</div>';
 	}
 
 	// Append the new column to the columns array
 	function column_heading( $columns )
 	{
-		$columns['last-modified'] = 'Last Modified';
+		$columns['last-modified'] = _x('Last Modified', 'column heading', 'last-modified-timestamp');
 		return $columns;
 	}
 

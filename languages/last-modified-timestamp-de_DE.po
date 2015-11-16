@@ -1,0 +1,91 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Last Modified Timestamp\n"
+"POT-Creation-Date: 2015-09-01 12:57+0100\n"
+"PO-Revision-Date: 2015-09-01 13:00+0100\n"
+"Last-Translator: Florian Edelmann <florian-edelmann@online.de>\n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.5\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: \n"
+
+#: last-modified-timestamp.php:5
+msgid ""
+"This plugin adds information to the admin interface about when each post/"
+"page was last modified (including custom post types!). Use the [last-"
+"modified] shortcode in your content!"
+msgstr ""
+"Dieses Plugin erweitert den Admin-Bereich um die Information, wann jeder "
+"Beitrag / Seite zuletzt geändert wurde (inklusive eigener "
+"Beitragstypen!). Benutze den [last-modified]-Shortcode in deinen "
+"Inhalten!"
+
+#: last-modified-timestamp.php:43
+msgctxt "default date format"
+msgid "M j, Y"
+msgstr "j. M Y"
+
+#: last-modified-timestamp.php:45
+msgctxt "default separator"
+msgid "@"
+msgstr "@"
+
+#: last-modified-timestamp.php:46
+msgctxt "default format"
+msgid "%date% %sep% %time%"
+msgstr "%date% %sep% %time%"
+
+#: last-modified-timestamp.php:51
+msgctxt "messages date format"
+msgid "M j, Y"
+msgstr "j. M Y"
+
+#: last-modified-timestamp.php:52
+msgctxt "messages separator"
+msgid "@"
+msgstr "um"
+
+#: last-modified-timestamp.php:55
+msgctxt "publish-box date format"
+msgid "M j, Y"
+msgstr "j. M Y"
+
+#: last-modified-timestamp.php:56
+msgctxt "publish-box separator"
+msgid "@"
+msgstr "@"
+
+#: last-modified-timestamp.php:59
+msgctxt "shortcode date format"
+msgid "M j, Y"
+msgstr "j. M Y"
+
+#: last-modified-timestamp.php:60
+msgctxt "shortcode separator"
+msgid "@"
+msgstr "@"
+
+#: last-modified-timestamp.php:63
+msgctxt "wp-table date format"
+msgid "Y/m/d"
+msgstr "d.m.Y"
+
+#: last-modified-timestamp.php:64
+msgctxt "wp-table separator"
+msgid "<br />"
+msgstr "<br />"
+
+#: last-modified-timestamp.php:182
+#, php-format
+msgid "Last modified on: <strong>%1$s</strong>"
+msgstr "Zuletzt geändert am: <strong>%1$s</strong>"
+
+#: last-modified-timestamp.php:189
+msgctxt "column heading"
+msgid "Last Modified"
+msgstr "Letzte Änderung"
