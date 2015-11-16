@@ -1,5 +1,5 @@
 === Last Modified Timestamp ===
-Stable tag: 1.0.2
+Stable tag: 1.0.4
 Contributors: aaemnnosttv
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LRA4JZYALHX82
 Tags: page modified, post modified, timestamp, last modified, modified time, custom post type modified
