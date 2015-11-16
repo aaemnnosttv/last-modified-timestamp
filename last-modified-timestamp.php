@@ -6,7 +6,7 @@
 	Text Domain: last-modified-timestamp
 	Domain Path: /languages
 	Author: Evan Mattson
-	Author URI: http://wp.aaemnnost.tv/
+	Author URI: https://aaemnnost.tv/
 	Plugin URI: https://github.com/aaemnnosttv/last-modified-timestamp
 */
 
