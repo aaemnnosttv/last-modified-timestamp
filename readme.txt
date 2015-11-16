@@ -4,7 +4,7 @@ Contributors: aaemnnosttv
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LRA4JZYALHX82
 Tags: page modified, post modified, timestamp, last modified, modified time, custom post type modified
 Requires at least: 3.2.0
-Tested up to: 3.9.1
+Tested up to: 4.4
 License: GPLv2 or later
 
 Adds the last modified time to the admin interface as well as a [last-modified] shortcode to use on the front-end. Over-powered.
