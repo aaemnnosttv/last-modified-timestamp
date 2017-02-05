@@ -90,6 +90,9 @@ Example array structure is: `array('datef' => 'M j, Y', 'timef' => 'g:i', 'sep' 
 
 == Changelog ==
 
+= 1.0.4 =
+* Add automated tests
+
 = 1.0.3 =
 * Template function bugfix
 
