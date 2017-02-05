@@ -30,6 +30,7 @@ No options currently available, but the output can be fully customized with filt
 == Frequently Asked Questions ==
 
 **How to add the last modified time to my page or post?**
+
 This plugin does not change the public facing appearance of your website, but gives you a few ways to add this if you wish.
 
 1. Using the `[last-modified]` shortcode. See below.
