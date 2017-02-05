@@ -29,6 +29,18 @@ No options currently available, but the output can be fully customized with filt
 
 == Frequently Asked Questions ==
 
+**How to add the last modified time to my page or post?**
+This plugin does not change the public facing appearance of your website, but gives you a few ways to add this if you wish.
+
+1. Using the `[last-modified]` shortcode. See below.
+2. Using template functions in your theme or plugin. See below.
+
+**How to provide the last modified time to search engines?**
+
+The best way to provide the last modified timestamp to search engines is by using a plugin to add an XML sitemap for your website. This is a special kind of document which provides various information to search engines about all the content on your website, including when each was last modified. Many SEO plugins provide include this functionality with them, but there are many standalone plugins for this as well. This allows search engines to reference a single file (which is automatically kept up to date for you by the plugin) to know exactly what content has changed on your whole website since it was last indexed, rather than recrawling every page.
+
+This plugin may be used to display the last modified date and time to a reader on your website, but it is not intended as a tool for SEO.
+
 **How to use the [last-modified] shortcode?**
 
 [last-modified] Returns the last modified timestamp in this format `date seperator time`.
