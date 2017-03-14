@@ -69,7 +69,7 @@ class LastModifiedTimestamp
 		/**
 		 * Init actions
 		 */
-		add_action( 'admin_init',		array( $this, 'admin_actions' ), 1 );
+		add_action( 'init', array( $this, 'admin_actions' ) );
 
 		add_shortcode( 'last-modified',	array( $this, 'shortcode_handler' ) );
 	}
