@@ -89,27 +89,20 @@ class LastModifiedTimestamp
 	 */
 	function construct_timestamp( $context = null, $override = null )
 	{
-		$data = $this->get_defaults( $context );
+        $data = new LastModifiedContext($context);
 
-		if ( $override && is_array( $override ) )
-			$data = wp_parse_args( $override, $data );
+        if ($override && is_array($override)) {
+            $data->merge($override);
+        }
 
-		extract( $data );
+        $timestamp = '<span class="last-modified-timestamp">' . $data->render_timestamp() . '</span>';
 
-		$timestamp = str_replace(
-			array( '%date%','%time%','%sep%' ),													// search
-			array( get_the_modified_date( $datef ), get_the_modified_time( $timef ), $sep ),	// replace
-			$format 																			// subject
-		);
-
-		$timestamp = '<span class="last-modified-timestamp">' . $timestamp . '</span>';
-
-		/**
-		 * filter 'last_modified_timestamp_output'
-		 *
-		 * @param mixed (null|string) $context  - the context the timestamp will be used in
-		 */
-		return apply_filters( 'last_modified_timestamp_output', $timestamp, $context );
+        /**
+         * filter 'last_modified_timestamp_output'
+         *
+         * @param mixed (null|string) $context  - the context the timestamp will be used in
+         */
+        return apply_filters('last_modified_timestamp_output', $timestamp, $context);
 	}
 
 	/**

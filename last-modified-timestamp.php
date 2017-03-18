@@ -13,6 +13,8 @@
 define('LAST_MODIFIED_TS__DIR', dirname(__FILE__));
 
 require_once(LAST_MODIFIED_TS__DIR . '/src/LastModifiedTimestamp.php');
+require_once(LAST_MODIFIED_TS__DIR . '/src/LastModifiedContext.php');
+require_once(LAST_MODIFIED_TS__DIR . '/src/FormattedString.php');
 require_once(LAST_MODIFIED_TS__DIR . '/src/functions.php');
 
 LastModifiedTimestamp::bootstrap(new LastModifiedTimestamp);
