@@ -12,13 +12,12 @@ php:
   - hhvm
 
 env:
-  - WP_VERSION=latest WP_MULTISITE=0
-  - PHPUNIT_BIN=vendor/bin/phpunit
+  - WP_VERSION=latest WP_MULTISITE=0 PHPUNIT_BIN=vendor/bin/phpunit
 
 matrix:
   include:
     - php: 5.3
-      env: PHPUNIT_BIN=phpunit-4.8.phar
+      env: WP_VERSION=latest WP_MULTISITE=0 PHPUNIT_BIN=phpunit-4.8.phar
     - php: 7.0
       env: WP_VERSION=latest WP_MULTISITE=1
 
