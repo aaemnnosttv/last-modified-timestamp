@@ -33,7 +33,7 @@ class LastModifiedTimestamp
 {
 	private static $instance;
 
-	protected function __construct()
+	public function __construct()
 	{
 		load_plugin_textdomain( 'last-modified-timestamp', false, dirname( plugin_basename(__FILE__) ) . '/languages/' );
 
