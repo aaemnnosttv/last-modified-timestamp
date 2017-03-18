@@ -22,10 +22,10 @@ matrix:
     - php: 7.0
       env: WP_VERSION=latest WP_MULTISITE=1
 
-install: [ $PHPUNIT_BIN = vendor/bin/phpunit ] && composer install
+install: if [ $PHPUNIT_BIN = vendor/bin/phpunit ]; then travis_retry composer install; fi
 
 before_script:
   - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
-  - [ $TRAVIS_PHP_VERSION = 5.3 ] && wget https://phar.phpunit.de/phpunit-4.8.phar
+  - if [ $TRAVIS_PHP_VERSION = 5.3 ]; then wget https://phar.phpunit.de/phpunit-4.8.phar; fi
 
 script: php $PHPUNIT_BIN
