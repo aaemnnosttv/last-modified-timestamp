@@ -13,15 +13,19 @@ php:
 
 env:
   - WP_VERSION=latest WP_MULTISITE=0
+  - PHPUNIT_BIN=vendor/bin/phpunit
 
 matrix:
   include:
+    - php: 5.3
+      env: PHPUNIT_BIN=phpunit-4.8.phar
     - php: 7.0
       env: WP_VERSION=latest WP_MULTISITE=1
 
-install: composer install
+install: [ $PHPUNIT_BIN = vendor/bin/phpunit ] && composer install
 
 before_script:
   - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+  - [ $TRAVIS_PHP_VERSION = 5.3 ] && wget https://phar.phpunit.de/phpunit-4.8.phar
 
-script: vendor/bin/phpunit
+script: php $PHPUNIT_BIN
