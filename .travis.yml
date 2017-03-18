@@ -15,6 +15,9 @@ env:
   - WP_VERSION=latest WP_MULTISITE=0 PHPUNIT_BIN=vendor/bin/phpunit
 
 matrix:
+  exclude:
+    - php: 5.3
+      env: PHPUNIT_BIN=vendor/bin/phpunit
   include:
     - php: 5.3
       env: WP_VERSION=latest WP_MULTISITE=0 PHPUNIT_BIN=phpunit-4.8.phar
