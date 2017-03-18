@@ -231,5 +231,7 @@ function the_last_modified_timestamp( $context = null, $override = null )
 	echo get_the_last_modified_timestamp( $context, $override );
 }
 
-//	MAKE IT SO.
-LastModifiedTimestamp::get_instance();
+/**
+ * Bootstrap the plugin instance.
+ */
+LastModifiedTimestamp::bootstrap(new LastModifiedTimestamp);
