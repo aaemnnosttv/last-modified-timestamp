@@ -10,6 +10,7 @@
 	Plugin URI: https://github.com/aaemnnosttv/last-modified-timestamp
 */
 
+define('LAST_MODIFIED_TS__DIR', dirname(__FILE__));
 
 class LastModifiedTimestamp
 {
