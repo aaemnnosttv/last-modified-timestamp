@@ -53,7 +53,7 @@ class LastModifiedTimestamp
      */
     function construct_timestamp($context = null, $override = null)
     {
-        $data = new LastModifiedContext($context);
+        $data = new LastModified__Context($context);
 
         if ($override && is_array($override)) {
             $data->merge($override);

@@ -1,6 +1,6 @@
 <?php
 
-class LastModifiedContext
+class LastModified__Context
 {
     /* @var string */
     protected $context;
@@ -38,7 +38,7 @@ class LastModifiedContext
      */
     public function render_timestamp()
     {
-        $timestamp = new FormattedString($this->get('format'));
+        $timestamp = new LastModified__FormattedString($this->get('format'));
 
         return $timestamp->render(array(
             'date' => get_the_modified_date($this->get('datef')),

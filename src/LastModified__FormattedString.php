@@ -1,7 +1,7 @@
 <?php
 
 
-class FormattedString
+class LastModified__FormattedString
 {
     protected $template;
 
