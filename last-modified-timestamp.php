@@ -35,8 +35,6 @@ class LastModifiedTimestamp
 
 	public function __construct()
 	{
-		load_plugin_textdomain( 'last-modified-timestamp', false, dirname( plugin_basename(__FILE__) ) . '/languages/' );
-
 		$this->defaults = array(
 			// base defaults
 			'base' => array(
@@ -65,17 +63,23 @@ class LastModifiedTimestamp
 				),
 			)
 		);
-
-		/**
-		 * Init actions
-		 */
-		add_action( 'init', array( $this, 'admin_actions' ) );
-
-		add_shortcode( 'last-modified',	array( $this, 'shortcode_handler' ) );
 	}
 
-	function admin_actions()
+	/**
+	 * @param LastModifiedTimestamp $instance
+	 */
+	public static function bootstrap($instance)
 	{
+		add_action('init', array($instance, 'init'));
+		self::$instance = $instance;
+	}
+
+	public function init()
+	{
+		load_plugin_textdomain( 'last-modified-timestamp', false, dirname( plugin_basename(__FILE__) ) . '/languages/' );
+
+		add_shortcode('last-modified', array($this, 'shortcode_handler'));
+
 		add_action( 'admin_print_styles-edit.php',			array( $this, 'print_admin_css' ) );
 		add_action( 'admin_print_styles-post.php',			array( $this, 'print_admin_css' ) );
 		add_action( 'admin_print_styles-post-new.php',		array( $this, 'print_admin_css' ) );
@@ -212,9 +216,6 @@ class LastModifiedTimestamp
 
 	public static function get_instance()
 	{
-		if ( is_null( self::$instance ) )
-			self::$instance = new self();
-
 		return self::$instance;
 	}
 
