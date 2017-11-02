@@ -10,6 +10,10 @@
  * Plugin URI: https://github.com/aaemnnosttv/last-modified-timestamp
  */
 
+if (! defined('ABSPATH')) {
+    exit;
+}
+
 define('LAST_MODIFIED_TS__DIR', dirname(__FILE__));
 
 if (version_compare(phpversion(), '5.3', '<')) {
