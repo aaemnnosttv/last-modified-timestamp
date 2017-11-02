@@ -16,4 +16,4 @@ if (version_compare(phpversion(), '5.3', '<')) {
     return require_once(LAST_MODIFIED_TS__DIR . '/src/insufficient-php.php');
 }
 
-LastModifiedTimestamp::bootstrap(new LastModifiedTimestamp);
+require_once(LAST_MODIFIED_TS__DIR . '/src/bootstrap.php');
