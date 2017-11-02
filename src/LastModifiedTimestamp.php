@@ -77,7 +77,7 @@ class LastModifiedTimestamp
      *
      * @return string            timestamp html
      */
-    function shortcode_handler($atts = array())
+    public function shortcode_handler($atts = array())
     {
         return $this->construct_timestamp('shortcode', $atts);
     }
@@ -90,7 +90,7 @@ class LastModifiedTimestamp
      *
      * @return array
      */
-    function modify_messages($messages)
+    public function modify_messages($messages)
     {
         $timestamp = $this->construct_timestamp('messages');
 
@@ -112,7 +112,7 @@ class LastModifiedTimestamp
     /**
      * Add the Last Modified timestamp to the 'Publish' meta box in post.php
      */
-    function publish_box()
+    public function publish_box()
     {
         $timestamp = sprintf(
             __('Last modified on: <strong>%1$s</strong>', 'last-modified-timestamp'),
@@ -128,7 +128,7 @@ class LastModifiedTimestamp
      *
      * @return mixed
      */
-    function column_heading($columns)
+    public function column_heading($columns)
     {
         $columns['last-modified'] = _x('Last Modified', 'column heading', 'last-modified-timestamp');
 
@@ -141,7 +141,7 @@ class LastModifiedTimestamp
      * @param $column_name
      * @param $id
      */
-    function column_content($column_name, $id)
+    public function column_content($column_name, $id)
     {
         if ('last-modified' == $column_name) {
             echo $this->construct_timestamp('wp-table');
@@ -155,7 +155,7 @@ class LastModifiedTimestamp
      *
      * @return array
      */
-    function column_sort($columns)
+    public function column_sort($columns)
     {
         $columns['last-modified'] = 'modified';
 
