@@ -75,6 +75,7 @@ class LastModified__Context
                 'messages'    => array(
                     'datef' => _x('M j, Y', 'messages date format', 'last-modified-timestamp'),
                     'sep'   => _x('@', 'messages separator', 'last-modified-timestamp'),
+                    'format' => _x('Last modified by %author% on %date% %sep% %time%', 'messages format', 'last-modified-timestamp'),
                 ),
                 'publish-box' => array(
                     'datef' => _x('M j, Y', 'publish-box date format', 'last-modified-timestamp'),
