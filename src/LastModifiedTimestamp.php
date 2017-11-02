@@ -1,5 +1,7 @@
 <?php
 
+use LastModifiedTimestamp\Context;
+
 class LastModifiedTimestamp
 {
     /**
@@ -50,7 +52,7 @@ class LastModifiedTimestamp
      */
     public function construct_timestamp($context_id = 'base', $override = null)
     {
-        $context = new LastModified__Context($context_id);
+        $context = new Context($context_id);
         $context->merge($override);
 
         $timestamp = '<span class="last-modified-timestamp">' . $context->render_timestamp() . '</span>';

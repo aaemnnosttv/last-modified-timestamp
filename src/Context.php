@@ -1,6 +1,8 @@
 <?php
 
-class LastModified__Context
+namespace LastModifiedTimestamp;
+
+class Context
 {
     /**
      * @var string The named context id.
@@ -53,7 +55,7 @@ class LastModified__Context
      */
     public function render_timestamp()
     {
-        $timestamp = new LastModified__FormattedString($this->get('format'));
+        $timestamp = new FormattedString($this->get('format'));
 
         $placeholders = array(
             'author' => get_post() ? get_the_modified_author() : '',

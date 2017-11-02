@@ -1,7 +1,8 @@
 <?php
 
+namespace LastModifiedTimestamp;
 
-class LastModified__FormattedString
+class FormattedString
 {
     protected $template;
 
