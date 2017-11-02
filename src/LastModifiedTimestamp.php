@@ -110,15 +110,13 @@ class LastModifiedTimestamp
     }
 
     /**
-     * Add the Last Modified timestamp to the 'Publish' meta box in post.php
+     * Render the Last Modified timestamp within the 'Publish' meta box in post.php
      */
     public function publish_box()
     {
-        $timestamp = sprintf(
-            __('Last modified on: <strong>%1$s</strong>', 'last-modified-timestamp'),
-            $this->construct_timestamp('publish-box')
-        );
-        echo '<div class="misc-pub-section misc-pub-section-last">' . $timestamp . '</div>';
+        $timestamp = $this->construct_timestamp('publish-box');
+
+        include LAST_MODIFIED_TS__DIR . '/views/publish-box.php';
     }
 
     /**
