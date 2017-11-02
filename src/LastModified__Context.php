@@ -28,8 +28,8 @@ class LastModified__Context
     public function merge($data)
     {
         $this->data = array_merge(
-            $this->data,
-            $data
+            (array) $this->data,
+            (array) $data
         );
     }
 
