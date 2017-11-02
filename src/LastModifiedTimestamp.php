@@ -29,9 +29,7 @@ class LastModifiedTimestamp
 
         add_shortcode('last-modified', array($this, 'shortcode_handler'));
 
-        add_action('admin_print_styles-edit.php', array($this, 'print_admin_css'));
-        add_action('admin_print_styles-post.php', array($this, 'print_admin_css'));
-        add_action('admin_print_styles-post-new.php', array($this, 'print_admin_css'));
+        add_action('admin_enqueue_scripts', array($this, 'add_styles'));
         add_action('post_submitbox_misc_actions', array($this, 'publish_box'), 1);
 
         add_filter('post_updated_messages', array($this, 'modify_messages'));
@@ -163,9 +161,15 @@ class LastModifiedTimestamp
     /**
      * Output common CSS for wp-admin.
      */
-    function print_admin_css()
+    public function add_styles()
     {
-        echo '<style type="text/css">.fixed .column-last-modified{width:10%;}#message .last-modified-timestamp{font-weight:bold;}</style>' . "\n";
+        $value_selectors = array_reduce(array('author', 'date', 'time'), function($selector, $attribute) {
+            $selector .= $selector ? ', ' : '';
+            return $selector . ".notice .last-modified-timestamp--$attribute";
+        }, '');
+
+        wp_add_inline_style('list-tables', '.fixed .column-last-modified { width: 11%; }');
+        wp_add_inline_style('edit', "$value_selectors { font-weight: bold; }");
     }
 
     /**
