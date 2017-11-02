@@ -104,6 +104,14 @@ Example array structure is: `array('datef' => 'M j, Y', 'timef' => 'g:i', 'sep' 
 
 == Changelog ==
 
+= 2.0.0 =
+* Plugin (mostly) rewritten
+* Added better test coverage
+* Added support for post author in messages and shortcode
+* Added icon to post publish box
+* Added CSS classes to timestamp elements for targeted styles
+* Minimum PHP increased to 5.3
+
 = 1.0.4 =
 * Add automated tests
 
