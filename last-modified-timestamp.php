@@ -12,9 +12,8 @@
 
 define('LAST_MODIFIED_TS__DIR', dirname(__FILE__));
 
-require_once(LAST_MODIFIED_TS__DIR . '/src/LastModifiedTimestamp.php');
-require_once(LAST_MODIFIED_TS__DIR . '/src/LastModified__Context.php');
-require_once(LAST_MODIFIED_TS__DIR . '/src/LastModified__FormattedString.php');
-require_once(LAST_MODIFIED_TS__DIR . '/src/functions.php');
+if (version_compare(phpversion(), '5.3', '<')) {
+    return require_once(LAST_MODIFIED_TS__DIR . '/src/insufficient-php.php');
+}
 
 LastModifiedTimestamp::bootstrap(new LastModifiedTimestamp);
