@@ -92,19 +92,21 @@ class LastModifiedTimestamp
     {
         $timestamp = $this->construct_timestamp('messages');
 
-        foreach ($messages as $posttype => &$array) {
-            foreach ($array as $index => &$msg) {
-                if (false !== $entry_point = strpos($msg, '.')) {
-                    $first_half  = substr($msg, 0, $entry_point + 1);
-                    $second_half = substr($msg, strlen($first_half));
-                    $msg         = "$first_half $timestamp. $second_half";
-                } else {
-                    $msg = "$timestamp: $msg";
-                }
-            }
-        }
+        return array_map(function($post_type_messages) use ($timestamp) {
+            return array_map(function($msg) use ($timestamp) {
+                $entry_point = strpos($msg, '<a');
 
-        return $messages;
+                // Inject the timestamp before the link in the message if it exists
+                if (false !== $entry_point) {
+                    $first_half  = substr($msg, 0, $entry_point - 1);
+                    $second_half = substr($msg, strlen($first_half));
+                    return "$first_half $timestamp. $second_half";
+                }
+
+                // Otherwise append the timestamp to the end of the message
+                return "$msg $timestamp";
+            }, $post_type_messages);
+        }, $messages);
     }
 
     /**
