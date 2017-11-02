@@ -98,6 +98,6 @@ class LastModified__Context
             ),
         );
 
-        return $defaults;
+        return apply_filters('last_modified_timestamp_defaults', $defaults, $this->context);
     }
 }
