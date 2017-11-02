@@ -7,8 +7,9 @@
         "composer/installers": "^1.0"
     },
     "require-dev": {
+        "phpdocumentor/reflection-docblock": "^2.0",
         "phpunit/phpunit": "^4.8",
-        "phpdocumentor/reflection-docblock": "^2.0"
+        "symfony/yaml": "^2.1"
     },
     "license": "GPL-2.0",
     "authors": [
