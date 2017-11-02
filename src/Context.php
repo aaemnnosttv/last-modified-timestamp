@@ -124,6 +124,7 @@ class Context
                 'wp-table'    => array(
                     'datef' => _x('Y/m/d', 'wp-table date format', 'last-modified-timestamp'),
                     'sep'   => _x('<br />', 'wp-table separator', 'last-modified-timestamp'),
+                    'format' => _x('%time% %sep% <abbr title>%date%</abbr>', 'wp-table format', 'last-modified-timestamp'),
                 ),
             ),
         );
