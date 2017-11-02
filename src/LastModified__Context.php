@@ -4,8 +4,11 @@ class LastModified__Context
 {
     /* @var string */
     protected $context;
-    /* @var array */
-    protected $defaults;
+
+    /**
+     * @var array The contextual configuration.
+     */
+    protected $config;
 
     /**
      * LastModifiedContext constructor.
@@ -33,8 +36,8 @@ class LastModified__Context
      */
     public function merge($data)
     {
-        $this->data = array_merge(
-            (array) $this->data,
+        $this->config = array_merge(
+            (array) $this->config,
             (array) $data
         );
     }
@@ -56,8 +59,8 @@ class LastModified__Context
 
     public function get($key, $default = null)
     {
-        if (isset($this->data[ $key ])) {
-            return $this->data[ $key ];
+        if (isset($this->config[ $key ])) {
+            return $this->config[ $key ];
         }
 
         return $default;
