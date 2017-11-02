@@ -41,6 +41,7 @@ class LastModified__Context
         $timestamp = new LastModified__FormattedString($this->get('format'));
 
         return $timestamp->render(array(
+            'author' => get_post() ? get_the_modified_author() : '',
             'date' => get_the_modified_date($this->get('datef')),
             'time' => get_the_modified_time($this->get('timef')),
             'sep'  => $this->get('sep'),
