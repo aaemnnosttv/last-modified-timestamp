@@ -3,17 +3,17 @@
 class LastModifiedTimestamp
 {
     /**
-     * @var LastModifiedTimestamp
+     * @var LastModifiedTimestamp Plugin class instance.
      */
     protected static $instance;
 
     /**
-     * @param LastModifiedTimestamp $instance
+     * @param LastModifiedTimestamp $instance Initialize the plugin instance.
      */
     public static function bootstrap($instance)
     {
-        add_action('init', array($instance, 'init'));
         self::$instance = $instance;
+        add_action('init', array($instance, 'init'));
     }
 
     /**
@@ -31,7 +31,6 @@ class LastModifiedTimestamp
 
         add_action('admin_enqueue_scripts', array($this, 'add_styles'));
         add_action('post_submitbox_misc_actions', array($this, 'publish_box'), 1);
-
         add_filter('post_updated_messages', array($this, 'modify_messages'));
 
         foreach (get_post_types() as $pt) {
@@ -44,27 +43,24 @@ class LastModifiedTimestamp
     /**
      * Returns a formatted timestamp as a string
      *
-     * @param  string $context  Defines what defaults are to be used to build the timestamp.
-     * @param  array  $override Used by shortcode to pass per-instance values
+     * @param  string $context_id  The name of a pre-defined context
+     * @param  array  $override    Overrides of context configuration
      *
-     * @return string    $timestramp        timestamp html
+     * @return string              Timestamp html
      */
-    function construct_timestamp($context = null, $override = null)
+    public function construct_timestamp($context_id = 'base', $override = null)
     {
-        $data = new LastModified__Context($context);
+        $context = new LastModified__Context($context_id);
+        $context->merge($override);
 
-        if ($override && is_array($override)) {
-            $data->merge($override);
-        }
-
-        $timestamp = '<span class="last-modified-timestamp">' . $data->render_timestamp() . '</span>';
+        $timestamp = '<span class="last-modified-timestamp">' . $context->render_timestamp() . '</span>';
 
         /**
          * filter 'last_modified_timestamp_output'
          *
          * @param mixed (null|string) $context - the context the timestamp will be used in
          */
-        return apply_filters('last_modified_timestamp_output', $timestamp, $context);
+        return apply_filters('last_modified_timestamp_output', $timestamp, $context_id, $context);
     }
 
     /**
