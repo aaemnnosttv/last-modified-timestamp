@@ -2,7 +2,9 @@
 
 class LastModified__Context
 {
-    /* @var string */
+    /**
+     * @var string The named context id.
+     */
     protected $context;
 
     /**
@@ -32,6 +34,8 @@ class LastModified__Context
     }
 
     /**
+     * Merge the given data with the configuration for this context.
+     *
      * @param array $data
      */
     public function merge($data)
@@ -43,6 +47,8 @@ class LastModified__Context
     }
 
     /**
+     * Render the HTML for the timestamp.
+     *
      * @return string
      */
     public function render_timestamp()
@@ -65,6 +71,14 @@ class LastModified__Context
         return $timestamp->render($replacements);
     }
 
+    /**
+     * Get a named configuration value.
+     *
+     * @param  string $key
+     * @param  mixed  $default
+     *
+     * @return mixed
+     */
     public function get($key, $default = null)
     {
         if (isset($this->config[ $key ])) {
@@ -75,6 +89,8 @@ class LastModified__Context
     }
 
     /**
+     * Get the default configuration.
+     *
      * @return array
      */
     protected function get_defaults()
