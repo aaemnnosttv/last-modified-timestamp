@@ -5,7 +5,7 @@ class LastModifiedTimestamp
     /**
      * @var LastModifiedTimestamp
      */
-    private static $instance;
+    protected static $instance;
 
     /**
      * @param LastModifiedTimestamp $instance
