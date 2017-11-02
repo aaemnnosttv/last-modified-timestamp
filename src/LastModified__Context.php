@@ -15,11 +15,17 @@ class LastModified__Context
     public function __construct($context = 'base')
     {
         $this->context = $context;
-        $defaults      = apply_filters('last_modified_timestamp_defaults', $this->get_defaults(), $context);
-        $this->data    = array_merge(
-            isset($defaults['base']) ? $defaults['base'] : array(),
-            isset($defaults[ $context ]) ? $defaults[ $context ] : array()
-        );
+        $this->populate_data();
+    }
+
+    /**
+     * Populate the configuration for the given context.
+     */
+    protected function populate_data()
+    {
+        $defaults = $this->get_defaults();
+        $this->merge(isset($defaults['base']) ? $defaults['base'] : array());
+        $this->merge(isset($defaults['contexts'][ $this->context ]) ? $defaults['contexts'][ $this->context ] : array());
     }
 
     /**
