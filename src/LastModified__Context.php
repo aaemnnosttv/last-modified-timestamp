@@ -49,12 +49,20 @@ class LastModified__Context
     {
         $timestamp = new LastModified__FormattedString($this->get('format'));
 
-        return $timestamp->render(array(
+        $placeholders = array(
             'author' => get_post() ? get_the_modified_author() : '',
             'date' => get_the_modified_date($this->get('datef')),
             'time' => get_the_modified_time($this->get('timef')),
             'sep'  => $this->get('sep'),
-        ));
+        );
+
+        $replacements = array_map(function($value, $key) {
+            return sprintf('<span class="last-modified-timestamp--%s">%s</span>', $key, $value);
+        }, $placeholders, array_keys($placeholders));
+
+        $replacements = array_combine(array_keys($placeholders), $replacements);
+
+        return $timestamp->render($replacements);
     }
 
     public function get($key, $default = null)
