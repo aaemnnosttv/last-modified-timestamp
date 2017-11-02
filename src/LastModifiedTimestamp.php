@@ -168,7 +168,7 @@ class LastModifiedTimestamp
             return $selector . ".notice .last-modified-timestamp--$attribute";
         }, '');
 
-        wp_add_inline_style('list-tables', '.fixed .column-last-modified { width: 11%; }');
+        wp_add_inline_style('list-tables', '.fixed .column-last-modified { width: 10em; }');
         wp_add_inline_style('edit', "$value_selectors { font-weight: bold; }");
     }
 
