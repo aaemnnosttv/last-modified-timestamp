@@ -9,7 +9,7 @@ php:
   - 5.3
   - 7.0
   - 7.1
-  - hhvm
+  - 7.2
 
 env:
   - WP_VERSION=latest WP_MULTISITE=0 PHPUNIT_BIN=vendor/bin/phpunit
