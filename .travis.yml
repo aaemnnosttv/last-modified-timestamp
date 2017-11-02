@@ -6,28 +6,22 @@ notifications:
     on_failure: change
 
 php:
-  - 5.3
+  - 5.4
   - 7.0
   - 7.1
   - 7.2
 
 env:
-  - WP_VERSION=latest WP_MULTISITE=0 PHPUNIT_BIN=vendor/bin/phpunit
+  - WP_VERSION=latest WP_MULTISITE=0
 
 matrix:
-  exclude:
-    - php: 5.3
-      env: WP_VERSION=latest WP_MULTISITE=0 PHPUNIT_BIN=vendor/bin/phpunit
   include:
-    - php: 5.3
-      env: WP_VERSION=latest WP_MULTISITE=0 PHPUNIT_BIN=phpunit-4.8.phar
     - php: 7.0
-      env: WP_VERSION=latest WP_MULTISITE=1 PHPUNIT_BIN=vendor/bin/phpunit
+      env: WP_VERSION=latest WP_MULTISITE=1
 
-install: if [ $PHPUNIT_BIN = vendor/bin/phpunit ]; then travis_retry composer install; fi
+install: composer install
 
 before_script:
   - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
-  - if [ $TRAVIS_PHP_VERSION = 5.3 ]; then wget https://phar.phpunit.de/phpunit-4.8.phar; fi
 
-script: php $PHPUNIT_BIN
+script: vendor/bin/phpunit
