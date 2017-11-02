@@ -97,6 +97,7 @@ class LastModified__Context
                 'publish-box' => array(
                     'datef' => _x('M j, Y', 'publish-box date format', 'last-modified-timestamp'),
                     'sep'   => _x('@', 'publish-box separator', 'last-modified-timestamp'),
+                    'format' => _x('Last modified on: <strong>%date% %sep% %time%</strong>', 'publish-box format', 'last-modified-timestamp'),
                 ),
                 'shortcode'   => array(
                     'datef' => _x('M j, Y', 'shortcode date format', 'last-modified-timestamp'),
