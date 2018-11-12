@@ -56,7 +56,7 @@ class ProvidesShortcodeTest extends WP_UnitTestCase
     function shortcode_can_include_the_author()
     {
         $post = $this->new_global_post();
-        $author = $this->factory->user->create_and_get(array('display_name' => 'The Name'));
+        $author = $this->factory()->user->create_and_get(array('display_name' => 'The Name'));
         $this->edit_post($post, $author);
 
         $this->assertShortcodeContains('The Name', array(
@@ -66,7 +66,7 @@ class ProvidesShortcodeTest extends WP_UnitTestCase
 
     protected function new_global_post($args = array())
     {
-        $GLOBALS['post'] = $this->factory->post->create_and_get($args);
+        $GLOBALS['post'] = $this->factory()->post->create_and_get($args);
 
         return $GLOBALS['post'];
     }

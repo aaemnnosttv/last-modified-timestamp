@@ -1,6 +1,7 @@
 <?php
 
 use LastModifiedTimestamp\Context;
+use LastModifiedTimestamp\TimestampFactory;
 
 class LastModifiedTimestamp
 {
@@ -8,6 +9,15 @@ class LastModifiedTimestamp
      * @var LastModifiedTimestamp Plugin class instance.
      */
     protected static $instance;
+    protected $factory;
+
+    /**
+     * LastModifiedTimestamp constructor.
+     */
+    public function __construct()
+    {
+        $this->factory = new TimestampFactory();
+    }
 
     /**
      * @param LastModifiedTimestamp $instance Initialize the plugin instance.
@@ -32,11 +42,11 @@ class LastModifiedTimestamp
         add_shortcode('last-modified', array($this, 'shortcode_handler'));
 
         add_action('admin_enqueue_scripts', array($this, 'add_styles'));
-        add_action('post_submitbox_misc_actions', array($this, 'publish_box'), 1);
         add_filter('post_updated_messages', array($this, 'modify_messages'));
+        add_action('post_submitbox_misc_actions', array($this, 'publish_box'), 1);
 
         foreach (get_post_types() as $pt) {
-            add_filter("manage_{$pt}_posts_columns", array($this, 'column_heading'), 10, 1);
+            add_filter("manage_{$pt}_posts_columns", array($this, 'column_heading'));
             add_action("manage_{$pt}_posts_custom_column", array($this, 'column_content'), 10, 2);
             add_action("manage_edit-{$pt}_sortable_columns", array($this, 'column_sort'), 10, 2);
         }
@@ -52,17 +62,15 @@ class LastModifiedTimestamp
      */
     public function construct_timestamp($context_id = 'base', $override = null)
     {
-        $context = new Context($context_id);
-        $context->merge($override);
-
-        $timestamp = '<span class="last-modified-timestamp">' . $context->render_timestamp() . '</span>';
+        $timestamp = $this->factory->make($context_id);
+        $timestamp->applyOverrides($override);
 
         /**
          * filter 'last_modified_timestamp_output'
          *
          * @param mixed (null|string) $context - the context the timestamp will be used in
          */
-        return apply_filters('last_modified_timestamp_output', $timestamp, $context_id, $context);
+        return apply_filters('last_modified_timestamp_output', $timestamp->toHtml(), $context_id);
     }
 
     /**

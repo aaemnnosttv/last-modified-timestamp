@@ -17,3 +17,4 @@ function lastmodified_timestamp__insufficient_php()
     include LAST_MODIFIED_TS__DIR . '/views/error-notice.php';
 }
 add_action('admin_notices', 'lastmodified_timestamp__insufficient_php');
+add_action('network_admin_notices', 'lastmodified_timestamp__insufficient_php');

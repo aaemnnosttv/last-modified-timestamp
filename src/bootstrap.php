@@ -4,8 +4,8 @@
  */
 
 require_once(LAST_MODIFIED_TS__DIR . '/src/LastModifiedTimestamp.php');
-require_once(LAST_MODIFIED_TS__DIR . '/src/Context.php');
-require_once(LAST_MODIFIED_TS__DIR . '/src/FormattedString.php');
+require_once(LAST_MODIFIED_TS__DIR . '/src/TimestampFactory.php');
+require_once(LAST_MODIFIED_TS__DIR . '/src/Timestamp.php');
 require_once(LAST_MODIFIED_TS__DIR . '/src/functions.php');
 
 LastModifiedTimestamp::bootstrap(new LastModifiedTimestamp);

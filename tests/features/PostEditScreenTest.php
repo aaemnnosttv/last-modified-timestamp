@@ -31,7 +31,7 @@ class PostEditScreenTest extends WP_UnitTestCase
 	function adds_last_modified_to_post_publish_box()
 	{
 		ob_start();
-		do_action('post_submitbox_misc_actions', $this->factory->post->create_and_get());
+		do_action('post_submitbox_misc_actions', $this->factory()->post->create_and_get());
 		$output = ob_get_clean();
 
 		$this->assertContains('last-modified-timestamp', $output);

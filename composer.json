@@ -2,20 +2,28 @@
     "name": "aaemnnosttv/last-modified-timestamp",
     "description": "A WordPress plugin for making the last modified date/time more accessible.",
     "type": "wordpress-plugin",
-    "require": {
-        "php": ">=5.3",
-        "composer/installers": "^1.0"
-    },
-    "require-dev": {
-        "phpdocumentor/reflection-docblock": "^2.0",
-        "phpunit/phpunit": "^4.8",
-        "symfony/yaml": "^2.1"
-    },
     "license": "GPL-2.0",
     "authors": [
         {
             "name": "Evan Mattson",
             "email": "me@aaemnnost.tv"
         }
-    ]
+    ],
+    "require": {
+        "php": ">=5.3",
+        "composer/installers": "^1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.8",
+        "wp-phpunit/wp-phpunit": "^4.9",
+        "johnpbloch/wordpress": "^4.9"
+    },
+    "config": {
+        "platform": {
+            "php": "5.3.3"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    }
 }

@@ -1,15 +1,19 @@
 <?php
+/**
+ * PHPUnit bootstrap file
+ */
 
-$_tests_dir = getenv( 'WP_TESTS_DIR' );
-if ( ! $_tests_dir ) {
-	$_tests_dir = '/tmp/wordpress-tests-lib';
-}
+// Composer autoloader must be loaded before WP_PHPUNIT__DIR will be available
+require_once dirname( __DIR__ ) . '/vendor/autoload.php';
 
-require_once $_tests_dir . '/includes/functions.php';
+// Give access to tests_add_filter() function.
+require_once getenv( 'WP_PHPUNIT__DIR' ) . '/includes/functions.php';
 
-function _manually_load_plugin() {
-	require dirname( dirname( __FILE__ ) ) . '/last-modified-timestamp.php';
-}
-tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
+tests_add_filter( 'muplugins_loaded', function() {
+    // test set up, plugin activation, etc.
+    require dirname( __DIR__ ) . '/last-modified-timestamp.php';
+} );
 
-require $_tests_dir . '/includes/bootstrap.php';
+// Start up the WP testing environment.
+putenv(sprintf('WP_PHPUNIT__TESTS_CONFIG=%s/wp-config.php', __DIR__));
+require getenv( 'WP_PHPUNIT__DIR' ) . '/includes/bootstrap.php';
