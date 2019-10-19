@@ -1,0 +1,10 @@
+.*
+bin/*
+tests/*
+vendor/*
+wordpress/*
+composer.json
+composer.lock
+phpcs.xml
+phpunit.xml
+README.md
