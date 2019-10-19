@@ -15,5 +15,8 @@
             "name": "Evan Mattson",
             "email": "me@aaemnnost.tv"
         }
-    ]
+    ],
+    "scripts": {
+        "test": "phpunit"
+    }
 }
