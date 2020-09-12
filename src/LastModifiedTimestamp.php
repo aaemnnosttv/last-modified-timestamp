@@ -1,6 +1,5 @@
 <?php
 
-use LastModifiedTimestamp\Context;
 use LastModifiedTimestamp\TimestampFactory;
 
 class LastModifiedTimestamp
