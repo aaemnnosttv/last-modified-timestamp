@@ -28,9 +28,9 @@ before_install: composer validate --strict
 install:
   - composer update phpunit/phpunit --with-dependencies
   - |
-    [ "$WP_VERSION" != "nightly" ] && composer require "roots/wordpress:$WP_VERSION" "wp-phpunit/wp-phpunit:$WP_VERSION" --update-with-dependencies
+    [ "$WP_VERSION" != "nightly" ] && composer require "roots/wordpress:$WP_VERSION" "wp-phpunit/wp-phpunit:$WP_VERSION" --update-with-dependencies || true
   - |
-    [ "$WP_VERSION" = "nightly" ]  && bin/install-wp-tests.sh tests root '' localhost $WP_VERSION
+    [ "$WP_VERSION" = "nightly" ]  && bin/install-wp-tests.sh tests root '' localhost $WP_VERSION || true
 
 script: composer test
 
