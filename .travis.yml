@@ -23,6 +23,9 @@ jobs:
       php: 5.6
       env: WP_VERSION=4.9.15
 
+env:
+  WP_DB_NAME: wordpress_tests
+
 before_install: composer validate --strict
 
 install:
@@ -30,7 +33,7 @@ install:
   - |
     [ "$WP_VERSION" != "nightly" ] && composer require "roots/wordpress:$WP_VERSION" "wp-phpunit/wp-phpunit:$WP_VERSION" --update-with-dependencies || true
   - |
-    [ "$WP_VERSION" = "nightly" ]  && bin/install-wp-tests.sh tests root '' localhost $WP_VERSION || true
+    [ "$WP_VERSION" = "nightly" ]  && bin/install-wp-tests.sh $WP_DB_NAME root '' localhost $WP_VERSION || true
 
 script: composer test
 
