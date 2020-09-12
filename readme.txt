@@ -1,14 +1,14 @@
 === Last Modified Timestamp ===
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 Contributors: aaemnnosttv
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LRA4JZYALHX82
 Tags: page modified, post modified, timestamp, last modified, modified time, custom post type modified
 Requires at least: 3.3.0
 Requires PHP: 5.6
-Tested up to: 4.8.3
+Tested up to: 5.4
 License: GPLv2 or later
 
-Adds the last modified time to the admin interface as well as a [last-modified] shortcode to use on the front-end. Over-powered.
+Adds the last modified time to the admin interface as well as a [last-modified] shortcode to use on the front-end.
 
 == Description ==
 
@@ -21,6 +21,11 @@ Enhanced areas:
 1. Admin messages after editing a page/post - ie: `Post updated. *timestamp* View Post`,
 
 No options currently available, but the output can be fully customized with filters and the shortcode can be easily customized using attributes!
+
+### Gutenberg, WordPress 5, and Beyond
+
+This plugin does not yet enhance the new editor provided by Gutenberg and introduced as the default editor in WordPress 5.0. No plans exist to add support for this although it may be added in the future.
+Other areas of wp-admin enhanced by the plugin still work, as does the classic editor.
 
 == Installation ==
 
@@ -110,7 +115,11 @@ Example array structure is: `array('datef' => 'M j, Y', 'timef' => 'g:i', 'sep' 
 * Added support for post author in messages and shortcode
 * Added icon to post publish box
 * Added CSS classes to timestamp elements for targeted styles
-* Minimum PHP increased to 5.3
+* Minimum PHP increased to 5.6
+
+= 1.0.5 =
+* Tweaked hook for testing
+* Integrated GitHub Actions
 
 = 1.0.4 =
 * Add automated tests
