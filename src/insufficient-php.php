@@ -12,7 +12,11 @@ require_once('functions.php');
  */
 function lastmodified_timestamp__insufficient_php()
 {
-    $message = __('<strong>Last Modified Timestamp requires PHP 5.3 or higher.</strong>');
+    $message = sprintf(
+        /* translators: %s: PHP version number */
+        __('Last Modified Timestamp requires PHP %s or higher.', 'last-modified-timestamp'),
+        LAST_MODIFIED_TS__PHP_MINIMUM
+    );
 
     include LAST_MODIFIED_TS__DIR . '/views/error-notice.php';
 }

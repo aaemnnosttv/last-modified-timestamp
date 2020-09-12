@@ -15,8 +15,9 @@ if (! defined('ABSPATH')) {
 }
 
 define('LAST_MODIFIED_TS__DIR', dirname(__FILE__));
+define('LAST_MODIFIED_TS__PHP_MINIMUM', '5.6.0');
 
-if (version_compare(phpversion(), '5.3', '<')) {
+if (version_compare(phpversion(), LAST_MODIFIED_TS__PHP_MINIMUM, '<')) {
     return require_once(LAST_MODIFIED_TS__DIR . '/src/insufficient-php.php');
 }
 
