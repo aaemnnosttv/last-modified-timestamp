@@ -5,23 +5,34 @@ notifications:
     on_success: never
     on_failure: change
 
-php:
-  - 5.4
-  - 7.0
-  - 7.1
-  - 7.2
-
-env:
-  - WP_VERSION=latest WP_MULTISITE=0
-
-matrix:
+jobs:
+  fast_finish: true
+  allow_failures:
+    - env: WP_VERSION=nightly
   include:
-    - php: 7.0
-      env: WP_VERSION=latest WP_MULTISITE=1
+    - name: PHPUnit (PHP 7.4, WordPress latest)
+      php: 7.4
+      env: WP_VERSION=*
+    - name: PHPUnit (PHP 7.4, WordPress latest Multisite)
+      php: 7.4
+      env: WP_VERSION=* WP_MULTISITE=1
+    - name: PHPUnit (PHP 7.4, WordPress nightly)
+      php: 7.4
+      env: WP_VERSION=nightly
+    - name: PHPUnit (PHP 5.6, WordPress 4.9)
+      php: 5.6
+      env: WP_VERSION=4.9.15
 
-install: composer install
+before_install: composer validate --strict
 
-before_script:
-  - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+install:
+  - composer update phpunit/phpunit --with-dependencies
+  - |
+    [ "$WP_VERSION" != "nightly" ] && composer require "roots/wordpress:$WP_VERSION" "wp-phpunit/wp-phpunit:$WP_VERSION" --update-with-dependencies
+  - |
+    [ "$WP_VERSION" = "nightly" ]  && bin/install-wp-tests.sh tests root '' localhost $WP_VERSION
 
-script: vendor/bin/phpunit
+script: composer test
+
+services:
+  - mysql
