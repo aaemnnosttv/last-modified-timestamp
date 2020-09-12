@@ -35,6 +35,10 @@ install:
   - |
     [ "$WP_VERSION" = "nightly" ]  && bin/install-wp-tests.sh $WP_DB_NAME root '' localhost $WP_VERSION || true
 
+before_script:
+  - |
+    [ "$WP_VERSION" != "nightly" ] && mysql -u root -e "CREATE DATABASE $WP_DB_NAME;" || true
+
 script: composer test
 
 services:
