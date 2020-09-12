@@ -24,7 +24,8 @@ jobs:
       env: WP_VERSION=4.9.15
 
 env:
-  - WP_DB_NAME=wordpress_tests
+  global:
+    - WP_DB_NAME=wordpress_tests
 
 before_install: composer validate --strict
 
