@@ -7,8 +7,15 @@
 	convertWarningsToExceptions="true"
 	>
 	<testsuites>
-		<testsuite>
+		<testsuite name="Feature">
 			<directory suffix=".php">./tests/features/</directory>
 		</testsuite>
+		<testsuite name="Unit">
+			<directory suffix=".php">./tests/unit/</directory>
+		</testsuite>
 	</testsuites>
+
+    <php>
+        <env name="WP_PHPUNIT__TABLE_PREFIX" value="tests_" />
+    </php>
 </phpunit>

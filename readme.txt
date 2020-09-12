@@ -3,8 +3,8 @@ Stable tag: 1.0.5
 Contributors: aaemnnosttv
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LRA4JZYALHX82
 Tags: page modified, post modified, timestamp, last modified, modified time, custom post type modified
-Requires at least: 3.2.0
-Requires PHP: 5.3
+Requires at least: 3.3.0
+Requires PHP: 5.6
 Tested up to: 5.4
 License: GPLv2 or later
 
@@ -108,6 +108,14 @@ Example array structure is: `array('datef' => 'M j, Y', 'timef' => 'g:i', 'sep' 
 1. Admin messages after editing a page/post - ie: `Post updated. *timestamp* View Post`
 
 == Changelog ==
+
+= 2.0.0 =
+* Plugin (mostly) rewritten
+* Added better test coverage
+* Added support for post author in messages and shortcode
+* Added icon to post publish box
+* Added CSS classes to timestamp elements for targeted styles
+* Minimum PHP increased to 5.6
 
 = 1.0.5 =
 * Tweaked hook for testing

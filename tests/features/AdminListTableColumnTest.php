@@ -20,7 +20,7 @@ class AdminListTableColumnTest extends WP_UnitTestCase
 	function outputs_timestamp_in_last_modified_column($post_type)
 	{
 		ob_start();
-		$post_id = $this->factory->post->create(array('post_type' => $post_type));
+		$post_id = $this->factory()->post->create(array('post_type' => $post_type));
 		do_action("manage_{$post_type}_posts_custom_column", 'last-modified', $post_id);
 		$output = ob_get_clean();
 

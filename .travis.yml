@@ -1,25 +1,50 @@
 language: php
 
-services:
-  - mysql
+notifications:
+  email:
+    on_success: never
+    on_failure: change
 
-php:
-  - 7.3
-  - 7.2
-  - 7.1
-  - 5.6
+cache:
+  directories:
+    - $HOME/.cache/composer
+
+jobs:
+  fast_finish: true
+  allow_failures:
+    - env: WP_VERSION=nightly
+  include:
+    - name: PHPUnit (PHP 7.4, WordPress latest)
+      php: 7.4
+      env: WP_VERSION=*
+    - name: PHPUnit (PHP 7.4, WordPress latest Multisite)
+      php: 7.4
+      env: WP_VERSION=* WP_MULTISITE=1
+    - name: PHPUnit (PHP 7.4, WordPress nightly)
+      php: 7.4
+      env: WP_VERSION=nightly
+    - name: PHPUnit (PHP 5.6, WordPress 4.9)
+      php: 5.6
+      env: WP_VERSION=4.9.15
 
 env:
-  - WP_VERSION=latest WP_MULTISITE=0
+  global:
+    - WP_DB_NAME=wordpress_tests
 
-matrix:
-  include:
-    - php: 7.3
-      env: WP_VERSION=latest WP_MULTISITE=1
+before_install: composer validate --strict
 
-install: composer install
+install:
+  - composer update phpunit/phpunit --with-dependencies
+  - |
+    [ "$WP_VERSION" != "nightly" ] && composer require "roots/wordpress:$WP_VERSION" "wp-phpunit/wp-phpunit:$WP_VERSION" --update-with-dependencies || true
+  - |
+    [ "$WP_VERSION" = "nightly" ]  && bin/install-wp-tests.sh $WP_DB_NAME root '' localhost $WP_VERSION || true
 
 before_script:
-  - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+  - |
+    [ "$WP_VERSION" != "nightly" ] && mysql -u root -e "CREATE DATABASE $WP_DB_NAME;" || true
 
 script: composer test
+
+services:
+  - mysql
