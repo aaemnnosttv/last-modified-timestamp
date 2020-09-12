@@ -33,12 +33,6 @@ class LastModifiedTimestamp
      */
     public function init()
     {
-        load_plugin_textdomain(
-            'last-modified-timestamp',
-            false,
-            dirname(plugin_basename(LAST_MODIFIED_TS__DIR)) . '/languages/'
-        );
-
         add_shortcode('last-modified', array($this, 'shortcode_handler'));
 
         add_action('admin_enqueue_scripts', array($this, 'add_styles'));
