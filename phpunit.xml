@@ -7,10 +7,10 @@
 	convertWarningsToExceptions="true"
 	>
 	<testsuites>
-		<testsuite>
+		<testsuite name="Feature">
 			<directory suffix=".php">./tests/features/</directory>
 		</testsuite>
-		<testsuite>
+		<testsuite name="Unit">
 			<directory suffix=".php">./tests/unit/</directory>
 		</testsuite>
 	</testsuites>
