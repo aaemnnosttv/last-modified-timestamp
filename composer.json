@@ -2,7 +2,7 @@
     "name": "aaemnnosttv/last-modified-timestamp",
     "description": "A WordPress plugin for making the last modified date/time more accessible.",
     "type": "wordpress-plugin",
-    "license": "GPL-2.0",
+    "license": "GPL-2.0-only",
     "authors": [
         {
             "name": "Evan Mattson",
