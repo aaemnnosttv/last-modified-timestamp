@@ -13,8 +13,10 @@ if ('nightly' === getenv('WP_VERSION')) {
     $_test_root = getenv('WP_PHPUNIT__DIR');
 }
 
+define('WP_PLUGIN_DIR', dirname(dirname(__DIR__)));
+
 $GLOBALS['wp_tests_options'] = [
-    'active_plugins' => ['last-modified-timestamp/last-modified-timestamp.php'],
+    'active_plugins' => [basename(dirname(__DIR__)) . '/last-modified-timestamp.php'],
 ];
 
 // Start up the WP testing environment.
