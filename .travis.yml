@@ -5,6 +5,10 @@ notifications:
     on_success: never
     on_failure: change
 
+cache:
+  directories:
+    - $HOME/.cache/composer
+
 jobs:
   fast_finish: true
   allow_failures:
