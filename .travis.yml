@@ -4,9 +4,7 @@ services:
   - mysql
 
 php:
-  - 7.3
-  - 7.2
-  - 7.1
+  - 7.4
   - 5.6
 
 env:
@@ -14,10 +12,12 @@ env:
 
 matrix:
   include:
-    - php: 7.3
+    - php: 7.4
       env: WP_VERSION=latest WP_MULTISITE=1
 
-install: composer install
+install:
+  - composer update phpunit/phpunit --with-dependencies --no-install
+  - composer install
 
 before_script:
   - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
