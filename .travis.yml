@@ -16,7 +16,7 @@ matrix:
       env: WP_VERSION=latest WP_MULTISITE=1
 
 install:
-  - composer update phpunit/phpunit --no-install
+  - composer update phpunit/phpunit --with-dependencies --no-install
   - composer install
 
 before_script:
