@@ -1,7 +1,7 @@
 <?php
 /*
 	Plugin Name: Last Modified Timestamp
-	Version: 1.0.5
+	Version: 1.1
 	Description: This plugin adds information to the admin interface about when each post/page was last modified (including custom post types!). Use the [last-modified] shortcode in your content!
 	Text Domain: last-modified-timestamp
 	Domain Path: /languages
@@ -112,31 +112,30 @@ class LastModifiedTimestamp
 	 * @param  array  	$override 		Used by shortcode to pass per-instance values
 	 * @return string 	$timestramp		timestamp html
 	 */
-	function construct_timestamp( $context = null, $override = null )
-	{
+	function construct_timestamp( $context = null, $override = null ) {
 		$data = $this->get_defaults( $context );
 
-		if ( $override && is_array( $override ) )
+		if ( $override && is_array( $override ) ) {
 			$data = wp_parse_args( $override, $data );
+		}
 
-		extract( $data );
+	extract( $data );
+    
+	// Use the 'post' variable if it's set and a valid number, otherwise default to the current post ID
+	$post_id = isset( $override['post'] ) && is_numeric( $override['post'] ) && intval( $override['post'] ) > 0 ? intval( $override['post'] ) : get_the_ID();
 
-		$timestamp = str_replace(
-			array( '%date%','%time%','%sep%' ),													// search
-			array( get_the_modified_date( $datef ), get_the_modified_time( $timef ), $sep ),	// replace
-			$format 																			// subject
-		);
+    if ( ! get_post_status( $post_id ) ) { // Check if post exists and is not a revision or an autosave
+        $post_id = get_the_ID();
+    }
 
-		$timestamp = '<span class="last-modified-timestamp">' . $timestamp . '</span>';
+	$date = get_the_modified_date( $datef, $post_id );
+	$time = get_the_modified_time( $timef, $post_id );
+	$timestamp = str_replace( array( '%date%', '%time%', '%sep%' ), array( $date, $time, $sep ), $format );
 
-		/**
-		 * filter 'last_modified_timestamp_output'
-		 *
-		 * @param mixed (null|string) $context  - the context the timestamp will be used in
-		 */
-		return apply_filters( 'last_modified_timestamp_output', $timestamp, $context );
-	}
+	$timestamp = '<span class="last-modified-timestamp">' . $timestamp . '</span>';
 
+	return apply_filters( 'last_modified_timestamp_output', $timestamp, $context );
+}
 	/**
 	 * Shortcode handler for [last-modified] shortcode
 	 * @param  array 	$atts 	Attributes array. possible attributes are 'datef', 'timef', 'sep' and 'format'.
@@ -145,10 +144,18 @@ class LastModifiedTimestamp
 	 */
 	function shortcode_handler( $atts = array() )
 	{
-		$atts = shortcode_atts( $this->get_defaults('shortcode'), $atts );
-		return $this->construct_timestamp('shortcode', $atts);
-	}
+		// Extend the `shortcode_atts` array to include a default 'post' attribute
+		$atts = shortcode_atts( array(
+		'datef'  => $this->get_defaults('shortcode')['datef'],
+		'timef'  => $this->get_defaults('shortcode')['timef'],
+		'sep'    => $this->get_defaults('shortcode')['sep'],
+		'format' => $this->get_defaults('shortcode')['format'],
+		'post'   => '' // New 'post' parameter to accept a post ID
+    ), $atts );
 
+    // Forward the parsed attributes (including the potential 'post' variable) to `construct_timestamp`
+    return $this->construct_timestamp('shortcode', $atts);
+}
 	/**
 	 * Filters the admin messages at the top of the page on post.php for pages & posts to include the last modified timestamp.
 	 * @param  array 	$messages
