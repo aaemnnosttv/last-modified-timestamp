@@ -35,8 +35,6 @@ class LastModifiedTimestamp
 
 	protected function __construct()
 	{
-		load_plugin_textdomain( 'last-modified-timestamp', false, dirname( plugin_basename(__FILE__) ) . '/languages/' );
-
 		$this->defaults = array(
 			// base defaults
 			'base' => array(
