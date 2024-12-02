@@ -4,7 +4,6 @@
 	Version: 1.0.5
 	Description: This plugin adds information to the admin interface about when each post/page was last modified (including custom post types!). Use the [last-modified] shortcode in your content!
 	Text Domain: last-modified-timestamp
-	Domain Path: /languages
 	Author: Evan Mattson
 	Author URI: https://aaemnnost.tv/
 	Plugin URI: https://github.com/aaemnnosttv/last-modified-timestamp
