@@ -2,7 +2,7 @@
 Stable tag: 1.0.6
 Contributors: aaemnnosttv
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LRA4JZYALHX82
-Tags: page modified, post modified, timestamp, last modified, modified time, custom post type modified
+Tags: page modified, post modified, updated at, last modified, modified time
 Requires at least: 4.6
 Requires PHP: 5.3
 Tested up to: 6.7.1
