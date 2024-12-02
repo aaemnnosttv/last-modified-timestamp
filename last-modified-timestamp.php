@@ -35,35 +35,6 @@ class LastModifiedTimestamp
 
 	protected function __construct()
 	{
-		$this->defaults = array(
-			// base defaults
-			'base' => array(
-				'datef'  => _x('M j, Y', 'default date format', 'last-modified-timestamp'),
-				'timef'  => null,
-				'sep'    => _x('@', 'default separator', 'last-modified-timestamp'),
-				'format' => _x('%date% %sep% %time%', 'default format', 'last-modified-timestamp')
-			),
-			// extended contextual defaults
-			'contexts' => array(
-				'messages'    	=> array(
-					'datef' => _x('M j, Y', 'messages date format', 'last-modified-timestamp'),
-					'sep'   => _x('@', 'messages separator', 'last-modified-timestamp')
-				),
-				'publish-box' 	=> array(
-					'datef' => _x('M j, Y', 'publish-box date format', 'last-modified-timestamp'),
-					'sep'   => _x('@', 'publish-box separator', 'last-modified-timestamp')
-				),
-				'shortcode' 	=> array(
-					'datef' => _x('M j, Y', 'shortcode date format', 'last-modified-timestamp'),
-					'sep'   => _x('@', 'shortcode separator', 'last-modified-timestamp')
-				),
-				'wp-table'    	=> array(
-					'datef' => _x('Y/m/d', 'wp-table date format', 'last-modified-timestamp'),
-					'sep'   => _x('<br />', 'wp-table separator', 'last-modified-timestamp')
-				),
-			)
-		);
-
 		/**
 		 * Init actions
 		 */
@@ -91,12 +62,41 @@ class LastModifiedTimestamp
 
 	function get_defaults( $context = null )
 	{
+		$defaults = array(
+			// base defaults
+			'base'     => array(
+				'datef'  => _x( 'M j, Y', 'default date format', 'last-modified-timestamp' ),
+				'timef'  => null,
+				'sep'    => _x( '@', 'default separator', 'last-modified-timestamp' ),
+				'format' => _x( '%date% %sep% %time%', 'default format', 'last-modified-timestamp' ),
+			),
+			// extended contextual defaults
+			'contexts' => array(
+				'messages'    => array(
+					'datef' => _x( 'M j, Y', 'messages date format', 'last-modified-timestamp' ),
+					'sep'   => _x( '@', 'messages separator', 'last-modified-timestamp' ),
+				),
+				'publish-box' => array(
+					'datef' => _x( 'M j, Y', 'publish-box date format', 'last-modified-timestamp' ),
+					'sep'   => _x( '@', 'publish-box separator', 'last-modified-timestamp' ),
+				),
+				'shortcode'   => array(
+					'datef' => _x( 'M j, Y', 'shortcode date format', 'last-modified-timestamp' ),
+					'sep'   => _x( '@', 'shortcode separator', 'last-modified-timestamp' ),
+				),
+				'wp-table'    => array(
+					'datef' => _x( 'Y/m/d', 'wp-table date format', 'last-modified-timestamp' ),
+					'sep'   => _x( '<br />', 'wp-table separator', 'last-modified-timestamp' ),
+				),
+			),
+		);
+
 		/**
 		 * filter 'last_modified_timestamp_defaults'
 		 *
 		 * @param mixed (null|string) $context  - the context the timestamp will be used in
 		 */
-		$defaults = apply_filters( 'last_modified_timestamp_defaults', $this->defaults, $context );
+		$defaults = apply_filters( 'last_modified_timestamp_defaults', $defaults, $context );
 
 		if ( $context && isset( $defaults['contexts'][ $context ] ) )
 			return wp_parse_args( $defaults['contexts'][ $context ], $defaults['base'] );
