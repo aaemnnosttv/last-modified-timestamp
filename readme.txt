@@ -109,6 +109,10 @@ Example array structure is: `array('datef' => 'M j, Y', 'timef' => 'g:i', 'sep' 
 
 == Changelog ==
 
+= 1.0.6 =
+* Fix notice about loading translations too early
+* Bump minimum required version of WP to 4.6
+
 = 1.0.5 =
 * Tweaked hook for testing
 * Integrated GitHub Actions
