@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: page modified, post modified, updated at, last modified, modified time
 Requires at least: 4.6
 Requires PHP: 5.3
-Tested up to: 6.7.1
+Tested up to: 6.8.2
 License: GPLv2 or later
 
 Adds the last modified time to the admin interface as well as a [last-modified] shortcode to use on the front-end.
