@@ -118,10 +118,12 @@ class LastModifiedTimestamp
 
 		extract( $data );
 
-		$timestamp = str_replace(
-			array( '%date%','%time%','%sep%' ),													// search
-			array( get_the_modified_date( $datef ), get_the_modified_time( $timef ), $sep ),	// replace
-			$format 																			// subject
+		$timestamp = trim(
+			str_replace(
+				array( '%date%','%time%','%sep%' ),													// search
+				array( get_the_modified_date( $datef ), get_the_modified_time( $timef ), $sep ),	// replace
+				$format 																			// subject
+			)
 		);
 
 		$timestamp = '<span class="last-modified-timestamp">' . $timestamp . '</span>';
